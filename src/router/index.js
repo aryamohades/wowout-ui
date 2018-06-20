@@ -10,7 +10,7 @@ Vue.use(Router)
 
 const authCheck = (to, from, next) => {
   if (!localStorage.getItem('token')) {
-    next({ path: '/login' })
+    return next({ path: '/login' })
   }
 
   next()

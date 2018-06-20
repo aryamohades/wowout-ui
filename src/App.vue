@@ -8,7 +8,7 @@
         <router-link :to="{ path: '/wowouts' }" class="header-link">Hall of Wowouts</router-link>
         <router-link :to="{ path: '/shame' }" class="header-link">Hall of Shame on Yous</router-link>
       </div>
-      <div class="header-section">
+      <div class="header-section" v-if="isAuth()">
         <router-link :to="{ path: '/me' }" class="profile-container">
           <img :src="profileImage" class="profile-image">
           <div class="header-name" v-text="name">
@@ -27,6 +27,11 @@ export default {
     return {
       name: localStorage.getItem('name'),
       profileImage: '/static/' + localStorage.getItem('profileImage')
+    }
+  },
+  methods: {
+    isAuth() {
+      return localStorage.getItem('token') !== null
     }
   }
 }
