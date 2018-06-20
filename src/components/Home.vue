@@ -243,7 +243,7 @@ export default {
     updoot(wowoutId) {
       axios({
         method: 'post',
-        url: `${this.apiBase}/${wowoutId}/updoot`,
+        url: `${this.apiBase}/wowouts/${wowoutId}/updoot`,
         headers: {
           'Authorization': localStorage.getItem('token')
         }

@@ -31,7 +31,7 @@ export default {
   },
   data() {
     return {
-      apiBase: 'https://obscure-bayou-43244.herokuapp.com/api/',
+      apiBase: 'https://obscure-bayou-43244.herokuapp.com/api',
       wowouts: []
     }
   },

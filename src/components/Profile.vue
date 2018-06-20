@@ -30,7 +30,7 @@ export default {
     return {
       points: null,
       pointsText: '',
-      apiBase: 'https://obscure-bayou-43244.herokuapp.com/api/'
+      apiBase: 'https://obscure-bayou-43244.herokuapp.com/api'
     }
   },
   methods: {
