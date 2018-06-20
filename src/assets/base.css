@@ -1,0 +1,56 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  background: #f2f2f2;
+  flex: 1;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+body.active {
+  overflow: hidden;
+}
+
+button {
+  transition: all .2s ease;
+  cursor: pointer;
+  background: #333;
+  color: white;
+  font-weight: bold;
+  height: 45px;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+}
+
+button:hover {
+  background: #3F3F3F;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  background: #eeeeee !important;
+  color: #aaa !important;
+  border: 1px solid #ccc !important;
+}
+
+input {
+  height: 40px;
+  font-size: 18px;
+  padding-left: 8px;
+  border: 1px solid #ccc;
+  transition: all .2s ease;
+}
+
+a {
+  text-decoration: none;
+  transition: all .2s ease;
+}
