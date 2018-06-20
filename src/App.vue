@@ -10,8 +10,8 @@
       </div>
       <div class="header-section" v-if="isAuth()">
         <router-link :to="{ path: '/me' }" class="profile-container">
-          <img :src="profileImage" class="profile-image">
-          <div class="header-name" v-text="name">
+          <img :src="profileImage()" class="profile-image">
+          <div class="header-name" v-text="profileName()">
           </div>
         </router-link>
       </div>
@@ -23,13 +23,13 @@
 <script>
 export default {
   name: 'App',
-  data: () => {
-    return {
-      name: localStorage.getItem('name'),
-      profileImage: '/static/' + localStorage.getItem('profileImage')
-    }
-  },
   methods: {
+    profileName() {
+      return localStorage.getItem('name');
+    },
+    profileImage() {
+      return '/static/' + localStorage.getItem('profileImage')
+    },
     isAuth() {
       return localStorage.getItem('token') !== null
     }
