@@ -79,6 +79,10 @@
           <img class="wowout-image" :src="getImageSrc(shame.shameReceiver.image)">
           <div class="wowout-name" v-text="shame.shameReceiver.name"></div>
           <div class="wowout-description" v-text="shame.description"></div>
+          <div class="wowout-giver-container">
+            <img class="wowout-giver-image" :src="getImageSrc(shame.shameGiver.image)">
+            <div class="wowout-giver-name" v-text="shame.shameGiver.name"></div>
+          </div>
           <div class="wowout-controls">
             <div class="wowout-votes wowout-downdoot-votes" v-text="shame.updoots"></div>
             <div class="wowout-updoot wowout-downdoot" @click="downdoot(shame.id)">
@@ -128,7 +132,9 @@ export default {
   },
   methods: {
     toggleSearch(search) {
-      this.isSearchFocused = search;
+      setTimeout(() => {
+        this.isSearchFocused = search
+      }, 200);
     },
     createShame() {
       axios({
@@ -285,9 +291,9 @@ export default {
     },
     getShameLeaderText() {
       if (this.shameOnYous.length > 0) {
-        return `Current Shame Leader: <b>${this.shameOnYous[0].shameReceiver.name}</b>`;
+        return `Current Shame on You Leader: <b>${this.shameOnYous[0].shameReceiver.name}</b>`;
       } else {
-        return 'Current Shame Leader'
+        return 'Current Shame on You Leader'
       }
     },
     dhm() {
@@ -514,6 +520,9 @@ export default {
 .user-search-results-container {
   border-top: none;
   width: 100%;
+  max-height: 200px;
+  overflow-y: scroll;
+  border: 1px solid #ccc;
 }
 
 .user-search-result {
