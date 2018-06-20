@@ -25,7 +25,8 @@ export default {
       password: '',
       loginError: null,
       emailError: null,
-      passwordError: null
+      passwordError: null,
+      apiBase: 'https://obscure-bayou-43244.herokuapp.com/api'
     }
   },
   methods: {
@@ -49,7 +50,7 @@ export default {
         this.passwordError = null
         this.loginError = null
 
-        axios.post('http://localhost:3000/api/login', {
+        axios.post(this.apiBase + '/login', {
           email: this.email,
           password: this.password
         })

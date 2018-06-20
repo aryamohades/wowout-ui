@@ -117,6 +117,7 @@ export default {
   },
   data () {
     return {
+      apiBase: 'https://obscure-bayou-43244.herokuapp.com/api',
       wowouts: [],
       shameOnYous: [],
       users: [],
@@ -139,7 +140,7 @@ export default {
     createShame() {
       axios({
         method: 'post',
-        url: 'http://localhost:3000/api/shameonyous',
+        url: this.apiBase + '/shameonyous',
         data: {
           userId: this.selectedUser.id,
           description: this.whyText
@@ -159,7 +160,7 @@ export default {
     createWowout() {
       axios({
         method: 'post',
-        url: 'http://localhost:3000/api/wowouts',
+        url: this.apiBase + '/wowouts',
         data: {
           userId: this.selectedUser.id,
           description: this.whyText
@@ -219,7 +220,7 @@ export default {
       document.body.classList.remove('active');
     },
     refreshWowouts() {
-      axios.get('http://localhost:3000/api/wowouts')
+      axios.get(this.apiBase + '/wowouts')
       .then((res) => {
         this.wowouts = res.data.data.wowouts
       })
@@ -228,7 +229,7 @@ export default {
       })
     },
     refreshShameOnYous() {
-      axios.get('http://localhost:3000/api/shameonyous')
+      axios.get(this.apiBase + '/shameonyous')
       .then((res) => {
         this.shameOnYous = res.data.data.shameonyous
       })
@@ -242,7 +243,7 @@ export default {
     updoot(wowoutId) {
       axios({
         method: 'post',
-        url: `http://localhost:3000/api/wowouts/${wowoutId}/updoot`,
+        url: `${this.apiBase}/${wowoutId}/updoot`,
         headers: {
           'Authorization': localStorage.getItem('token')
         }
@@ -257,7 +258,7 @@ export default {
     downdoot(shameId) {
       axios({
         method: 'post',
-        url: `http://localhost:3000/api/shameonyous/${shameId}/downdoot`,
+        url: `${this.apiBase}/shameonyous/${shameId}/downdoot`,
         headers: {
           'Authorization': localStorage.getItem('token')
         }

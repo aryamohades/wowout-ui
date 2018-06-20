@@ -21,7 +21,7 @@ const axios = require('axios')
 export default {
   name: 'Home',
   created() {
-    axios.get('http://localhost:3000/api/wowouts/history')
+    axios.get(this.apiBase + '/wowouts/history')
       .then((res) => {
         this.wowouts = res.data.data.wowouts
       })
@@ -31,6 +31,7 @@ export default {
   },
   data() {
     return {
+      apiBase: 'https://obscure-bayou-43244.herokuapp.com/api/',
       wowouts: []
     }
   },

@@ -21,7 +21,7 @@ const axios = require('axios')
 export default {
   name: 'Home',
   created() {
-    axios.get('http://localhost:3000/api/shameonyous/history')
+    axios.get(this.apiBase + '/shameonyous/history')
       .then((res) => {
         this.shameOnYous = res.data.data.shameonyous
       })
@@ -31,6 +31,7 @@ export default {
   },
   data() {
     return {
+      apiBase: 'https://obscure-bayou-43244.herokuapp.com/api/',
       shameOnYous: []
     }
   },

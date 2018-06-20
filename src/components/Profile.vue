@@ -29,14 +29,15 @@ export default {
   data() {
     return {
       points: null,
-      pointsText: ''
+      pointsText: '',
+      apiBase: 'https://obscure-bayou-43244.herokuapp.com/api/'
     }
   },
   methods: {
     refreshPoints() {
       axios({
         method: 'get',
-        url: 'http://localhost:3000/api/me',
+        url: this.apiBase + '/me',
         headers: {
           Authorization: localStorage.getItem('token')
         }
@@ -61,7 +62,7 @@ export default {
     redeem(cost) {
       axios({
         method: 'post',
-        url: 'http://localhost:3000/api/redeem',
+        url: this.apiBase + '/redeem',
         data: {
           cost
         },
