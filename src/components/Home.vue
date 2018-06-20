@@ -7,8 +7,8 @@
       </div>
       <div class="new-wowout-label">New Wowout</div>
       <div class="user-search-container">
-        <input v-model="userSearchTerm" class="wowout-user-search" placeholder="Who?" @input="updateSearchResults">
-        <div class="user-search-results-container" v-if="userSearchResults.length > 0">
+        <input @focus="toggleSearch(true)" @blur="toggleSearch(false)" v-model="userSearchTerm" class="wowout-user-search" placeholder="Who?" @input="updateSearchResults">
+        <div class="user-search-results-container" v-if="isSearchFocused">
           <div v-for="(user, index) in userSearchResults" class="user-search-result" :key="index" @click="selectUser(user.name, user.id, user.image)">
             <img class="search-result-image" :src="getImageSrc(user.image)">
             <div class="search-result-name" v-text="user.name"></div>
@@ -28,8 +28,8 @@
       </div>
       <div class="new-wowout-label">New Shame On You</div>
       <div class="user-search-container">
-        <input v-model="userSearchTerm" class="wowout-user-search" placeholder="Who?" @input="updateSearchResults">
-        <div class="user-search-results-container" v-if="userSearchResults.length > 0">
+        <input @focus="toggleSearch(true)" @blur="toggleSearch(false)" v-model="userSearchTerm" class="wowout-user-search" placeholder="Who?" @input="updateSearchResults">
+        <div class="user-search-results-container" v-if="isSearchFocused">
           <div v-for="(user, index) in userSearchResults" class="user-search-result" :key="index" @click="selectUser(user.name, user.id, user.image)">
             <img class="search-result-image" :src="getImageSrc(user.image)">
             <div class="search-result-name" v-text="user.name"></div>
@@ -100,6 +100,7 @@ export default {
     axios.get('http://localhost:3000/api/users')
       .then((res) => {
         this.users = res.data.data.users
+        this.userSearchResults = this.users
       })
       .catch((res) => {
         this.appError = 'Error retrieving data'
@@ -121,10 +122,14 @@ export default {
       selectedUser: null,
       userSearchTerm: '',
       whyText: '',
-      countdown: ''
+      countdown: '',
+      isSearchFocused: false
     }
   },
   methods: {
+    toggleSearch(search) {
+      this.isSearchFocused = search;
+    },
     createShame() {
       axios({
         method: 'post',
@@ -172,11 +177,11 @@ export default {
         image
       },
       this.userSearchTerm = '';
-      this.userSearchResults = [];
+      this.userSearchResults = this.users;
     },
     updateSearchResults({ target }) {
       if (target.value === '') {
-        this.userSearchResults = [];
+        this.userSearchResults = this.users;
       }
       else {
         this.userSearchResults = this.users.filter((user) => (
@@ -186,7 +191,7 @@ export default {
     },
     createWowoutModal() {
       this.userSearchTerm = '';
-      this.userSearchResults = [];
+      this.userSearchResults = this.users;
       this.selectedUser = null;
       this.whyText = '';
       this.creatingWowout = true;
@@ -195,7 +200,7 @@ export default {
     },
     createShameModal() {
       this.userSearchTerm = '';
-      this.userSearchResults = [];
+      this.userSearchResults = this.users;
       this.selectedUser = null;
       this.whyText = '';
       this.creatingWowout = false;
